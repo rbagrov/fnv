@@ -15,7 +15,7 @@ class logger(object):
         '''
         References to a log file.
         Sets log config
-        
+
         Args: self
         Raises:
         Returns: None
@@ -29,7 +29,7 @@ class logger(object):
     def info(self, message):
         '''
         Logs info message
-        
+
         Args: self, message
         Raises:
         Returns: None
@@ -39,7 +39,7 @@ class logger(object):
     def exception(self, message):
         '''
         Logs exception message
-        
+
         Args: self, message
         Raises:
         Returns: None
@@ -52,10 +52,10 @@ class db(object):
     def __init__(self):
         '''
         Create references to statement objects
-        
+
         Args: self
         Raises:
-        Returns: 
+        Returns:
             self.insert - object of class string
             self.insert_score - object of class string
             self.insert_check - object of class string
@@ -69,13 +69,16 @@ class db(object):
             self.pairings - object of class string
             self.log - logger class instance
             self.tiner - object of type integer
-        '''    
-        self.insert = 'INSERT INTO players (name, wins, matches) VALUES  (%s, 0, 0);'
-        self.insert_score = "UPDATE players SET wins = %s, matches = %s WHERE id = %s;"
+        '''
+        self.insert = 'INSERT INTO players (name, wins, matches) VALUES\
+                          (%s, 0, 0);'
+        self.insert_score = "UPDATE players SET wins = %s, matches = %s WHERE\
+                          id = %s;"
         self.insert_check = 'SELECT id FROM players WHERE name=%s;'
         self.counter = 'SELECT * from players;'
         self.remove_players = 'TRUNCATE players;'
-        self.remove_matches = 'UPDATE players SET wins = 0, matches = 0  WHERE wins > 0 or matches > 0;'
+        self.remove_matches = 'UPDATE players SET wins = 0, matches = 0  WHERE\
+                                  wins > 0 or matches > 0;'
         self.standings = 'SELECT id, name, wins, matches FROM players;'
         self.get_wins = "SELECT wins FROM players WHERE id = %s;"
         self.get_match = "SELECT matches FROM players WHERE id = %s;"
@@ -92,7 +95,7 @@ class db(object):
         Args: self
         Raises: psycopg2.OperationalError
         Returns:
-		object of type list(psycopg2 connection and cursor objects)
+                object of type list(psycopg2 connection and cursor objects)
         '''
         while True:
             try:
@@ -106,13 +109,13 @@ class db(object):
     def deletePlayers(self):
         '''
         Truncates players table
-        
+
         Args: self
-        Raises: 
-		pokemon catching exceptions for log purposes
+        Raises:
+                pokemon catching exceptions for log purposes
         Returns:
-		object of type string
-		object of type None
+                object of type string
+                object of type None
         '''
         new = self.open_connection()
         connection = new[0]
@@ -130,13 +133,13 @@ class db(object):
     def countPlayers(self):
         '''
         Counter entries in players table
-        
+
         Args: self
         Raises:
-		pokemon catching exceptions for log purposes
+                pokemon catching exceptions for log purposes
         Returns:
-		object of type integer
-		object of type None
+                object of type integer
+                object of type None
         '''
         new = self.open_connection()
         connection = new[0]
@@ -151,7 +154,7 @@ class db(object):
     def registerPlayer(self, name):
         '''
         Insert player details into players table
-        
+
         Args: self
               name - object of type string
         Raises:
@@ -176,7 +179,7 @@ class db(object):
     def deleteMatches(self):
         '''
         Removes all matches entires
-        
+
         Args: self
         Raises:
                 pokemon catching exceptions for log purposes
@@ -198,7 +201,7 @@ class db(object):
     def playerStandings(self):
         '''
         Returns current standings from players table
-        
+
         Args: self
         Raises:
                 pokemon catching exceptions for log purposes
@@ -219,7 +222,7 @@ class db(object):
     def recordMatch(self, uid):
         '''
         Writes played match into games tables
-        
+
         Args: self
               uid - object of type list
         Raises:
@@ -238,7 +241,7 @@ class db(object):
     def setMatchScore(self, uid_win, uid_lost):
         '''
         Set match score
-        
+
         Args: self
               uid_win object of type integer
               uid_lost object of type integer
@@ -277,7 +280,7 @@ class db(object):
     def getWins(self, uid):
         '''
         Get win record for user by its id
-        
+
         Args: self
               uid - object of type integer
         Raises:
@@ -300,7 +303,7 @@ class db(object):
     def getMatch(self, uid):
         '''
         Get match record for user by its id
-        
+
         Args: self
               uid - object of type integer
         Raises:
@@ -323,7 +326,7 @@ class db(object):
     def get_pairings(self):
         '''
         Returns formatted list with player pairings
-        
+
         Args: self
         Raises:
                 pokemon catching exceptions for log purposes
@@ -344,7 +347,7 @@ class db(object):
     def pair_rawlist(self, player_list, step):
         '''
         Creates a list with user pairings
-        
+
         Args: self
               player_list - object of type list
               step - object of type integer
@@ -366,7 +369,7 @@ class db(object):
     def reportMatch(self, uid):
         '''
         Sets match score
-        
+
         Args: self
               uid - object of type list
         Raises:
@@ -384,17 +387,17 @@ class db(object):
     def query(self, **kwargs):
         '''
         Executes different queries base on keyed arguments
-        
+
         Args: self
-	      key arguments
+              key arguments
         Raises:
         Returns: (in descending order)
                 object of type String/None
                 object of type Integer/None
-		object of type String/None
+                object of type String/None
                 object of type String/None
                 object of type List/None
-                object of type List/None 
+                object of type List/None
         '''
         for key, value in kwargs.iteritems():
             if key is 'player':
@@ -418,7 +421,7 @@ class Players(object):
     def __init__(self):
         '''
         Instantiates objects
-        
+
         Args: self
         Raises:
         Returns:
@@ -460,7 +463,7 @@ class Game(object):
     def __init__(self):
         '''
         Creates instant object
-        
+
         Args: self
         Raises:
         Returns:

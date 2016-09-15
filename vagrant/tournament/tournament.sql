@@ -5,12 +5,12 @@
 --
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
-DROP DATABASE tournament;
+DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
 \connect tournament
 CREATE TABLE players(
    ID SERIAL PRIMARY KEY  NOT NULL,
-   NAME           TEXT    NOT NULL,
+   NAME    VARCHAR(20)    NOT NULL,
    WINS           INT     NOT NULL,
    MATCHES        INT     NOT NULL
 );
