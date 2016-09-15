@@ -12,22 +12,64 @@ import time
 class logger(object):
 
     def __init__(self):
-        self.log_file = 'tournament.log'
+        '''
+        References to a log file.
+        Sets log config
+        
+        Args: self
+        Raises:
+        Returns: None
+        '''
+        log_file = 'tournament.log'
         logging.basicConfig(
-            filename=self.log_file,
+            filename=log_file,
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s: %(message)s')
 
     def info(self, message):
+        '''
+        Logs info message
+        
+        Args: self, message
+        Raises:
+        Returns: None
+        '''
         logging.info(message)
 
     def exception(self, message):
+        '''
+        Logs exception message
+        
+        Args: self, message
+        Raises:
+        Returns: None
+        '''
         logging.exception(message)
 
 
 class db(object):
 
     def __init__(self):
+        '''
+        Create references to statement objects
+        
+        Args: self
+        Raises:
+        Returns: 
+            self.insert - object of class string
+            self.insert_score - object of class string
+            self.insert_check - object of class string
+            self.counter - object of class string
+            self.remove_players - object of class string
+            self.remove_matches - object of class string
+            self.standings - object of class string
+            self.get_wins - object of class string
+            self.get_match - object of class string
+            self.record - object of class string
+            self.pairings - object of class string
+            self.log - logger class instance
+            self.tiner - object of type integer
+        '''    
         self.insert = 'INSERT INTO players (name, wins, matches) VALUES  (%s, 0, 0);'
         self.insert_score = "UPDATE players SET wins = %s, matches = %s WHERE id = %s;"
         self.insert_check = 'SELECT id FROM players WHERE name=%s;'
@@ -46,20 +88,32 @@ class db(object):
         '''
         Connect to the PostgreSQL database.
         Returns a database connection and a cursor.
+
+        Args: self
+        Raises: psycopg2.OperationalError
+        Returns:
+		object of type list(psycopg2 connection and cursor objects)
         '''
-        connection_up = False
-        while connection_up is False:
+        while True:
             try:
                 connection = psycopg2.connect(
                     'dbname=tournament')
-                cursor = connection.cursor()
-                connection_up = True
-                return [connection, cursor]
+                return [connection, connection.cursor()]
             except psycopg2.OperationalError:
                 self.log.info('Cannot connect. Retrying...')
                 time.sleep(self.timer)
 
     def deletePlayers(self):
+        '''
+        Truncates players table
+        
+        Args: self
+        Raises: 
+		pokemon catching exceptions for log purposes
+        Returns:
+		object of type string
+		object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -74,6 +128,16 @@ class db(object):
             return None
 
     def countPlayers(self):
+        '''
+        Counter entries in players table
+        
+        Args: self
+        Raises:
+		pokemon catching exceptions for log purposes
+        Returns:
+		object of type integer
+		object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -85,6 +149,17 @@ class db(object):
             return None
 
     def registerPlayer(self, name):
+        '''
+        Insert player details into players table
+        
+        Args: self
+              name - object of type string
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type string
+                object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -99,6 +174,16 @@ class db(object):
             return None
 
     def deleteMatches(self):
+        '''
+        Removes all matches entires
+        
+        Args: self
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type string
+                object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -111,6 +196,16 @@ class db(object):
             return None
 
     def playerStandings(self):
+        '''
+        Returns current standings from players table
+        
+        Args: self
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type list
+                object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -122,6 +217,15 @@ class db(object):
             return None
 
     def recordMatch(self, uid):
+        '''
+        Writes played match into games tables
+        
+        Args: self
+              uid - object of type list
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -132,6 +236,18 @@ class db(object):
             self.log.exception(e)
 
     def setMatchScore(self, uid_win, uid_lost):
+        '''
+        Set match score
+        
+        Args: self
+              uid_win object of type integer
+              uid_lost object of type integer
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type string
+                object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -159,6 +275,17 @@ class db(object):
             return None
 
     def getWins(self, uid):
+        '''
+        Get win record for user by its id
+        
+        Args: self
+              uid - object of type integer
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type integer
+                object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -171,6 +298,17 @@ class db(object):
             return None
 
     def getMatch(self, uid):
+        '''
+        Get match record for user by its id
+        
+        Args: self
+              uid - object of type integer
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type integer
+                object of type None
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -183,6 +321,15 @@ class db(object):
             return None
 
     def get_pairings(self):
+        '''
+        Returns formatted list with player pairings
+        
+        Args: self
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+                object of type list
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -192,9 +339,20 @@ class db(object):
             return self.pair_rawlist(backlist, 2)
         except Exception as e:
             self.log.exception(e)
-            return e
+            return None
 
     def pair_rawlist(self, player_list, step):
+        '''
+        Creates a list with user pairings
+        
+        Args: self
+              player_list - object of type list
+              step - object of type integer
+        Raises:
+              IndexError - catch it if list indexes are uneven
+        Returns:
+                object of type list
+        '''
         output = []
         try:
             for i in range(0, len(player_list), step):
@@ -206,6 +364,15 @@ class db(object):
             return self.log.info('Players number is uneven')
 
     def reportMatch(self, uid):
+        '''
+        Sets match score
+        
+        Args: self
+              uid - object of type list
+        Raises:
+                pokemon catching exceptions for log purposes
+        Returns:
+        '''
         new = self.open_connection()
         connection = new[0]
         cursor = new[1]
@@ -215,7 +382,20 @@ class db(object):
             self.log.exception(e)
 
     def query(self, **kwargs):
-        '''Executes different queries base on keyed arguments'''
+        '''
+        Executes different queries base on keyed arguments
+        
+        Args: self
+	      key arguments
+        Raises:
+        Returns: (in descending order)
+                object of type String/None
+                object of type Integer/None
+		object of type String/None
+                object of type String/None
+                object of type List/None
+                object of type List/None 
+        '''
         for key, value in kwargs.iteritems():
             if key is 'player':
                 return self.registerPlayer(value)
@@ -236,6 +416,15 @@ class db(object):
 class Players(object):
 
     def __init__(self):
+        '''
+        Instantiates objects
+        
+        Args: self
+        Raises:
+        Returns:
+                class instance object
+                class instance object
+        '''
         self.dbapi = db()
         self.log = logger()
 
@@ -251,7 +440,7 @@ class Players(object):
 
     def countPlayers(self):
         '''Returns the number of players currently registered.'''
-        return int(self.dbapi.query(count='yes'))
+        return self.dbapi.query(count='yes')
 
     def registerPlayer(self, name):
         '''Adds a player to the tournament database.
@@ -269,6 +458,14 @@ class Players(object):
 class Game(object):
 
     def __init__(self):
+        '''
+        Creates instant object
+        
+        Args: self
+        Raises:
+        Returns:
+                class instance object
+        '''
         self.dbapi = db()
 
     def playerStandings(self):
@@ -281,7 +478,7 @@ class Game(object):
         Returns:
              A list of tuples,
                 each of which contains (id, name, wins, matches):
-             id: the player's unique id (assigned by the database)
+            rid: the player's unique id (assigned by the database)
              name: the player's full name (as registered)
              wins: the number of matches the player has won
              matches: the number of matches the player has played
@@ -295,7 +492,7 @@ class Game(object):
             player1: the id number of the first player
             player2: the id number of the player second player
         '''
-        return self.dbapi.query(report_match=[player1, player2])
+        self.dbapi.query(report_match=[player1, player2])
 
     def swissPairings(self):
         '''Returns a list of pairs of players for the next round of a match.
