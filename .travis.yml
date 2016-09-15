@@ -8,6 +8,8 @@ cache:
         - $HOME/.cache/pip
 services:
     - postgresql
+addons:
+    postgresql: "9.3"
 before_script:
     - psql -c '\i vagrant/tournament/tournament.sql' -U postgres
 install:
