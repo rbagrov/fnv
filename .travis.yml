@@ -6,7 +6,13 @@ cache:
     apt: true
     directories:
         - $HOME/.cache/pip
+services:
+    - postgresql
+before_script:
+    - psql -c 'create database tournament;' -U postgres
 install:
     - pip install -r vagrant/tournament/requirements.txt
+    - psql tournament < tournament.sql
 script:
     - pycodestyle --show-source vagrant/tournament/tournament.py
+    - python vagrant/tournament/tournament_test.py
