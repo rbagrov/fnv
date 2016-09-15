@@ -6,9 +6,7 @@ cache:
     apt: true
     directories:
         - $HOME/.cache/pip
-before_install:
-    - sudo apt-get -qq update
 install:
-    - pip install -r requirements.txt
+    - pip install -r vagrant/tournament/requirements.txt
 script:
-    - pycodestyle --show-source tournamentk.py
+    - pycodestyle --show-source vagrant/tournament/tournament.py
