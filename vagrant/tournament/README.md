@@ -45,7 +45,7 @@ Contents
 * [tournament.log](https://github.com/rbagrov/fullstack-nanodegree-vm/blob/master/vagrant/tournament/tournament.log)
 * [tournament.sql](https://github.com/rbagrov/fullstack-nanodegree-vm/blob/master/vagrant/tournament/tournament.sql)
 * [tournament_test.py](https://github.com/rbagrov/fullstack-nanodegree-vm/blob/master/vagrant/tournament/tournament_test.py)
-* [requirements.txt`](https://github.com/rbagrov/fullstack-nanodegree-vm/blob/master/vagrant/tournament/requirements.txt)
+* [requirements.txt](https://github.com/rbagrov/fullstack-nanodegree-vm/blob/master/vagrant/tournament/requirements.txt)
 
 
 
@@ -119,7 +119,6 @@ CLASSES
      |      id2: the second player's unique id
      |      name2: the second player's name
      |  
-     |  ----------------------------------------------------------------------
      |  Data descriptors defined here:
      |  
      |  __dict__
@@ -157,74 +156,6 @@ CLASSES
      |      Args:
      |      name: the player's full name (need not be unique).
      |  
-     |  ----------------------------------------------------------------------
-     |  Data descriptors defined here:
-     |  
-     |  __dict__
-     |      dictionary for instance variables (if defined)
-     |  
-     |  __weakref__
-     |      list of weak references to the object (if defined)
-    
-    class db(__builtin__.object)
-     |  Methods defined here:
-     |  
-     |  __init__(self)
-     |      Create references to statement objects
-     |      
-     |      Args: self
-     |      Raises:
-     |      Returns:
-     |          self.insert - object of class string
-     |          self.insert_score - object of class string
-     |          self.insert_check - object of class string
-     |          self.counter - object of class string
-     |          self.remove_players - object of class string
-     |          self.remove_matches - object of class string
-     |          self.standings - object of class string
-     |          self.get_wins - object of class string
-:
-     |      name2: the second player's name
-     |  
-     |  ----------------------------------------------------------------------
-     |  Data descriptors defined here:
-     |  
-     |  __dict__
-     |      dictionary for instance variables (if defined)
-     |  
-     |  __weakref__
-     |      list of weak references to the object (if defined)
-    
-    class Players(__builtin__.object)
-     |  Methods defined here:
-     |  
-     |  __init__(self)
-     |      Instantiates objects
-     |      
-     |      Args: self
-     |      Raises:
-     |      Returns:
-     |              class instance object
-     |              class instance object
-     |  
-     |  countPlayers(self)
-     |      Returns the number of players currently registered.
-     |  
-     |  deleteMatches(self)
-     |      Remove all the match records from the database.
-     |  
-     |  deletePlayers(self)
-     |      Remove all the player records from the database.
-     |  
-     |  registerPlayer(self, name)
-     |      Adds a player to the tournament database.
-     |      The database assigns a unique serial id number for the player.  (This
-     |      should be handled by your SQL database schema,
-     |      not in your Python code.
-     |      Args:
-     |      name: the player's full name (need not be unique).
-     |  
-     |  ----------------------------------------------------------------------
      |  Data descriptors defined here:
      |  
      |  __dict__
@@ -252,7 +183,6 @@ CLASSES
      |          self.get_wins - object of class string
      |      name2: the second player's name
      |  
-     |  ----------------------------------------------------------------------
      |  Data descriptors defined here:
      |  
      |  __dict__
@@ -290,7 +220,6 @@ CLASSES
      |      Args:
      |      name: the player's full name (need not be unique).
      |  
-     |  ----------------------------------------------------------------------
      |  Data descriptors defined here:
      |  
      |  __dict__
@@ -316,7 +245,71 @@ CLASSES
      |          self.remove_matches - object of class string
      |          self.standings - object of class string
      |          self.get_wins - object of class string
-    |          self.get_match - object of class string
+     |      name2: the second player's name
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+    
+    class Players(__builtin__.object)
+     |  Methods defined here:
+     |  
+     |  __init__(self)
+     |      Instantiates objects
+     |      
+     |      Args: self
+     |      Raises:
+     |      Returns:
+     |              class instance object
+     |              class instance object
+     |  
+     |  countPlayers(self)
+     |      Returns the number of players currently registered.
+     |  
+     |  deleteMatches(self)
+     |      Remove all the match records from the database.
+     |  
+     |  deletePlayers(self)
+     |      Remove all the player records from the database.
+     |  
+     |  registerPlayer(self, name)
+     |      Adds a player to the tournament database.
+     |      The database assigns a unique serial id number for the player.  (This
+     |      should be handled by your SQL database schema,
+     |      not in your Python code.
+     |      Args:
+     |      name: the player's full name (need not be unique).
+     |
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+    
+    class db(__builtin__.object)
+     |  Methods defined here:
+     |  
+     |  __init__(self)
+     |      Create references to statement objects
+     |      
+     |      Args: self
+     |      Raises:
+     |      Returns:
+     |          self.insert - object of class string
+     |          self.insert_score - object of class string
+     |          self.insert_check - object of class string
+     |          self.counter - object of class string
+     |          self.remove_players - object of class string
+     |          self.remove_matches - object of class string
+     |          self.standings - object of class string
+     |          self.get_wins - object of class string
+     |          self.get_match - object of class string
      |          self.record - object of class string
      |          self.pairings - object of class string
      |          self.log - logger class instance
@@ -469,7 +462,6 @@ CLASSES
      |              object of type string
      |              object of type None
      |  
-     |  ----------------------------------------------------------------------
      |  Data descriptors defined here:
      |  
      |  __dict__
@@ -503,7 +495,6 @@ CLASSES
      |      Raises:
      |      Returns: None
      |  
-     |  ----------------------------------------------------------------------
      |  Data descriptors defined here:
      |  
      |  __dict__
