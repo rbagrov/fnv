@@ -65,24 +65,25 @@ class db(object):
             self.standings - object of class string
             self.get_wins - object of class string
             self.get_match - object of class string
-            self.record - object of class string
             self.pairings - object of class string
             self.log - logger class instance
             self.tiner - object of type integer
         '''
-        self.insert = 'INSERT INTO players (name, wins, matches) VALUES\
-                          (%s, 0, 0);'
+        self.insert_name = 'INSERT INTO players (name) VALUES (%s);'
+        self.init_wins = 'INSERT INTO wins (id, wins) VALUES (%s, %s);'
+        self.init_matches = 'INSERT INTO wins (id, wins) VALUES (%s, %s);'
         self.insert_score = "UPDATE players SET wins = %s, matches = %s WHERE\
                           id = %s;"
         self.insert_check = 'SELECT id FROM players WHERE name=%s;'
         self.counter = 'SELECT * from players;'
         self.remove_players = 'TRUNCATE players;'
-        self.remove_matches = 'UPDATE players SET wins = 0, matches = 0  WHERE\
-                                  wins > 0 or matches > 0;'
-        self.standings = 'SELECT id, name, wins, matches FROM players;'
+        self.remove_wins = 'TRUNCATE wins;'
+        self.remove_matches = 'TRUNCATE matches;'
+        self.zero_wins = 'UPDATE wins SET wins = 0 WHERE wins > 0 ;'
+        self.zero_matches = "UPDATE matches SET maches = 0 WHERE matches > 0"
+        self.standings = 'SELECT * FROM standings;'
         self.get_wins = "SELECT wins FROM players WHERE id = %s;"
         self.get_match = "SELECT matches FROM players WHERE id = %s;"
-        self.record = "INSERT INTO games (aid, bid) VALUES (%s, %s);"
         self.pairings = "SELECT id, name FROM players ORDER BY wins DESC"
         self.log = logger()
         self.timer = 1
@@ -122,6 +123,8 @@ class db(object):
         cursor = new[1]
         try:
             cursor.execute(self.remove_players)
+            cursor.execute(self.remove_wins)
+            cursor.execute(self.remove_matches)
             connection.commit()
             cursor.execute(self.counter)
             if cursor.rowcount == 0:
@@ -167,10 +170,14 @@ class db(object):
         connection = new[0]
         cursor = new[1]
         try:
-            cursor.execute(self.insert, (name, ))
+            cursor.execute(self.insert_name, (name, ))
             connection.commit()
             cursor.execute(self.insert_check, (name, ))
-            if len(cursor.fetchall()):
+            pid = cursor.fetchall()
+            if len(pid):
+                cursor.execute(self.init_wins, (pid, 0))
+                cursor.execute(self.init_matches, (pid, 0))
+                connection.commit()
                 return 'OK'
         except Exception as e:
             self.log.exception(e)
@@ -191,7 +198,8 @@ class db(object):
         connection = new[0]
         cursor = new[1]
         try:
-            cursor.execute(self.remove_matches)
+            cursor.execute(self.zero_matches)
+            cursor.execute(self.zero_wins)
             connection.commit()
             return 'OK'
         except Exception as e:
@@ -218,25 +226,6 @@ class db(object):
         except Exception as e:
             self.log.exception(e)
             return None
-
-    def recordMatch(self, uid):
-        '''
-        Writes played match into games tables
-
-        Args: self
-              uid - object of type list
-        Raises:
-                pokemon catching exceptions for log purposes
-        Returns:
-        '''
-        new = self.open_connection()
-        connection = new[0]
-        cursor = new[1]
-        try:
-            cursor.execute(self.record, (uid[0], uid[1]))
-            connection.commit()
-        except Exception as e:
-            self.log.exception(e)
 
     def setMatchScore(self, uid_win, uid_lost):
         '''
