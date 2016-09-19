@@ -56,35 +56,38 @@ class db(object):
         Args: self
         Raises:
         Returns:
-            self.insert - object of class string
-            self.insert_score - object of class string
-            self.insert_check - object of class string
-            self.counter - object of class string
-            self.remove_players - object of class string
-            self.remove_matches - object of class string
-            self.standings - object of class string
-            self.get_wins - object of class string
-            self.get_match - object of class string
-            self.pairings - object of class string
+            self.insert_name - object of type string
+            self.init_wins - object of type string
+            self.init_match - object of type string
+            self.insert_wins - object of type string
+            self.insert_matches - object of type string
+            self.insert_check - object of type string
+            self.counter - object of type string
+            self.remove_players - object of type string
+            self.zero_wins = object of type string
+            self.zero_matches = object of type string
+            self.remove_matches - object of type string
+            self.standings - object of type string
+            self.get_wins - object of type string
+            self.get_match - object of type string
+            self.pairings - object of type string
             self.log - logger class instance
             self.tiner - object of type integer
         '''
         self.insert_name = 'INSERT INTO players (name) VALUES (%s);'
         self.init_wins = 'INSERT INTO wins (id, wins) VALUES (%s, %s);'
-        self.init_matches = 'INSERT INTO wins (id, wins) VALUES (%s, %s);'
-        self.insert_score = "UPDATE players SET wins = %s, matches = %s WHERE\
-                          id = %s;"
+        self.init_match = 'INSERT INTO matches (id, matches) VALUES (%s, %s);'
+        self.insert_wins = 'UPDATE wins SET wins = %s WHERE id = %s;'
+        self.insert_matches = 'UPDATE matches SET matches = %s WHERE id = %s;'
         self.insert_check = 'SELECT id FROM players WHERE name=%s;'
         self.counter = 'SELECT * from players;'
-        self.remove_players = 'TRUNCATE players;'
-        self.remove_wins = 'TRUNCATE wins;'
-        self.remove_matches = 'TRUNCATE matches;'
-        self.zero_wins = 'UPDATE wins SET wins = 0 WHERE wins > 0 ;'
-        self.zero_matches = "UPDATE matches SET maches = 0 WHERE matches > 0"
+        self.remove_players = 'TRUNCATE players CASCADE;'
+        self.zero_wins = 'UPDATE wins SET wins = 0 WHERE wins > 0;'
+        self.zero_matches = 'UPDATE matches SET matches = 0 WHERE matches > 0;'
         self.standings = 'SELECT * FROM standings;'
-        self.get_wins = "SELECT wins FROM players WHERE id = %s;"
-        self.get_match = "SELECT matches FROM players WHERE id = %s;"
-        self.pairings = "SELECT id, name FROM players ORDER BY wins DESC"
+        self.get_wins = 'SELECT wins FROM wins WHERE id = %s;'
+        self.get_matches = 'SELECT matches FROM matches WHERE id = %s;'
+        self.pairings = 'SELECT * FROM pairings;'
         self.log = logger()
         self.timer = 1
 
@@ -123,8 +126,6 @@ class db(object):
         cursor = new[1]
         try:
             cursor.execute(self.remove_players)
-            cursor.execute(self.remove_wins)
-            cursor.execute(self.remove_matches)
             connection.commit()
             cursor.execute(self.counter)
             if cursor.rowcount == 0:
@@ -173,10 +174,10 @@ class db(object):
             cursor.execute(self.insert_name, (name, ))
             connection.commit()
             cursor.execute(self.insert_check, (name, ))
-            pid = cursor.fetchall()
+            pid = cursor.fetchone()
             if len(pid):
                 cursor.execute(self.init_wins, (pid, 0))
-                cursor.execute(self.init_matches, (pid, 0))
+                cursor.execute(self.init_match, (pid, 0))
                 connection.commit()
                 return 'OK'
         except Exception as e:
@@ -245,15 +246,17 @@ class db(object):
         cursor = new[1]
         try:
             cursor.execute(
-                self.insert_score,
-                (self.getWins(uid_win) + 1,
-                 self.getMatch(uid_win) + 1,
-                 uid_win))
+                self.insert_wins,
+                (self.getWins(uid_win) + 1, uid_win))
             cursor.execute(
-                self.insert_score,
-                (self.getWins(uid_lost),
-                 self.getMatch(uid_lost) + 1,
-                 uid_lost))
+                self.insert_matches,
+                (self.getMatches(uid_win) + 1, uid_win))
+            cursor.execute(
+                self.insert_wins,
+                (self.getWins(uid_lost), uid_lost))
+            cursor.execute(
+                self.insert_matches,
+                (self.getMatches(uid_lost) + 1, uid_lost))
             connection.commit()
             self.log.info(
                 'Match between ' +
@@ -289,7 +292,7 @@ class db(object):
             self.log.exception(e)
             return None
 
-    def getMatch(self, uid):
+    def getMatches(self, uid):
         '''
         Get match record for user by its id
 
@@ -305,7 +308,7 @@ class db(object):
         connection = new[0]
         cursor = new[1]
         try:
-            cursor.execute(self.get_match, (uid,))
+            cursor.execute(self.get_matches, (uid,))
             match = cursor.fetchone()
             return match[0]
         except Exception as e:

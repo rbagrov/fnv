@@ -27,11 +27,20 @@ CREATE VIEW standings
 AS 
   SELECT players.id, 
          players.name, 
-         count(wins.wins) AS wins, 
-         count(matches.matches) AS matches 
+         wins.wins, 
+         matches.matches 
   FROM players 
        LEFT JOIN wins 
               ON players.id = wins.id 
        LEFT JOIN matches 
               ON players.id = matches.id 
-  GROUP BY players.id;
+  GROUP BY players.id, wins.wins, matches.matches;
+
+CREATE VIEW pairings
+AS
+   SELECT players.id,
+          players.name
+   FROM players
+        LEFT JOIN wins
+               ON players.id = wins.id
+   ORDER BY wins.wins DESC; 
