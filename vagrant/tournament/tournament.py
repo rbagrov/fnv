@@ -57,37 +57,22 @@ class db(object):
         Raises:
         Returns:
             self.insert_name - object of type string
-            self.init_wins - object of type string
-            self.init_match - object of type string
-            self.insert_wins - object of type string
-            self.insert_matches - object of type string
-            self.insert_check - object of type string
+            self.addmatch - object of type string
             self.counter - object of type string
             self.remove_players - object of type string
-            self.zero_wins = object of type string
-            self.zero_matches = object of type string
             self.remove_matches - object of type string
             self.standings - object of type string
-            self.get_wins - object of type string
-            self.get_match - object of type string
             self.pairings - object of type string
             self.log - logger class instance
             self.tiner - object of type integer
         '''
         self.insert_name = 'INSERT INTO players (name) VALUES (%s);'
-        self.init_wins = 'INSERT INTO wins (id, wins) VALUES (%s, %s);'
-        self.init_match = 'INSERT INTO matches (id, matches) VALUES (%s, %s);'
-        self.insert_wins = 'UPDATE wins SET wins = %s WHERE id = %s;'
-        self.insert_matches = 'UPDATE matches SET matches = %s WHERE id = %s;'
-        self.insert_check = 'SELECT id FROM players WHERE name=%s;'
+        self.addmatch = 'INSERT INTO matches (winner, loser) VALUES (%s, %s);'
         self.counter = 'SELECT * from players;'
         self.remove_players = 'TRUNCATE players CASCADE;'
-        self.zero_wins = 'UPDATE wins SET wins = 0 WHERE wins > 0;'
-        self.zero_matches = 'UPDATE matches SET matches = 0 WHERE matches > 0;'
+        self.remove_matches = 'TRUNCATE matches;'
         self.standings = 'SELECT * FROM standings;'
-        self.get_wins = 'SELECT wins FROM wins WHERE id = %s;'
-        self.get_matches = 'SELECT matches FROM matches WHERE id = %s;'
-        self.pairings = 'SELECT * FROM pairings;'
+        self.pairings = 'SELECT * FROM selection;'
         self.log = logger()
         self.timer = 1
 
@@ -128,7 +113,7 @@ class db(object):
             cursor.execute(self.remove_players)
             connection.commit()
             cursor.execute(self.counter)
-            if cursor.rowcount == 0:
+            if cursor.fetchone() == 0:
                 return 'OK'
         except Exception as e:
             self.log.exception(e)
@@ -173,13 +158,7 @@ class db(object):
         try:
             cursor.execute(self.insert_name, (name, ))
             connection.commit()
-            cursor.execute(self.insert_check, (name, ))
-            pid = cursor.fetchone()
-            if len(pid):
-                cursor.execute(self.init_wins, (pid, 0))
-                cursor.execute(self.init_match, (pid, 0))
-                connection.commit()
-                return 'OK'
+            return 'OK'
         except Exception as e:
             self.log.exception(e)
             return None
@@ -199,8 +178,7 @@ class db(object):
         connection = new[0]
         cursor = new[1]
         try:
-            cursor.execute(self.zero_matches)
-            cursor.execute(self.zero_wins)
+            cursor.execute(self.remove_matches)
             connection.commit()
             return 'OK'
         except Exception as e:
@@ -224,93 +202,6 @@ class db(object):
         try:
             cursor.execute(self.standings)
             return cursor.fetchall()
-        except Exception as e:
-            self.log.exception(e)
-            return None
-
-    def setMatchScore(self, uid_win, uid_lost):
-        '''
-        Set match score
-
-        Args: self
-              uid_win object of type integer
-              uid_lost object of type integer
-        Raises:
-                pokemon catching exceptions for log purposes
-        Returns:
-                object of type string
-                object of type None
-        '''
-        new = self.open_connection()
-        connection = new[0]
-        cursor = new[1]
-        try:
-            cursor.execute(
-                self.insert_wins,
-                (self.getWins(uid_win) + 1, uid_win))
-            cursor.execute(
-                self.insert_matches,
-                (self.getMatches(uid_win) + 1, uid_win))
-            cursor.execute(
-                self.insert_wins,
-                (self.getWins(uid_lost), uid_lost))
-            cursor.execute(
-                self.insert_matches,
-                (self.getMatches(uid_lost) + 1, uid_lost))
-            connection.commit()
-            self.log.info(
-                'Match between ' +
-                uid_win +
-                ' and ' +
-                uid_lost +
-                ' was succefully stored')
-            return 'OK'
-        except Exception as e:
-            self.log.exception(e)
-            return None
-
-    def getWins(self, uid):
-        '''
-        Get win record for user by its id
-
-        Args: self
-              uid - object of type integer
-        Raises:
-                pokemon catching exceptions for log purposes
-        Returns:
-                object of type integer
-                object of type None
-        '''
-        new = self.open_connection()
-        connection = new[0]
-        cursor = new[1]
-        try:
-            cursor.execute(self.get_wins, (uid,))
-            wins = cursor.fetchone()
-            return wins[0]
-        except Exception as e:
-            self.log.exception(e)
-            return None
-
-    def getMatches(self, uid):
-        '''
-        Get match record for user by its id
-
-        Args: self
-              uid - object of type integer
-        Raises:
-                pokemon catching exceptions for log purposes
-        Returns:
-                object of type integer
-                object of type None
-        '''
-        new = self.open_connection()
-        connection = new[0]
-        cursor = new[1]
-        try:
-            cursor.execute(self.get_matches, (uid,))
-            match = cursor.fetchone()
-            return match[0]
         except Exception as e:
             self.log.exception(e)
             return None
@@ -372,7 +263,15 @@ class db(object):
         connection = new[0]
         cursor = new[1]
         try:
-            self.setMatchScore(str(uid[0]), str(uid[1]))
+            cursor.execute(self.addmatch, (str(uid[0]), str(uid[1])))
+            connection.commit()
+            self.log.info(
+                'Match between ' +
+                uid_win +
+                ' and ' +
+                uid_lost +
+                ' was succefully stored')
+            return 'OK'
         except Exception as e:
             self.log.exception(e)
 

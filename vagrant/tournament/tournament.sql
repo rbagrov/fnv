@@ -14,33 +14,21 @@ CREATE TABLE players(
 );
 
 CREATE TABLE matches(
-   ID SERIAL references players(ID),
-   MATCHES           INT  NOT NULL
+   ID SERIAL PRIMARY KEY,
+   winner INTEGER REFERENCES players(ID),
+   loser INTEGER REFERENCES players(ID)
 );
 
-CREATE TABLE wins(
-   ID SERIAL references players(ID),
-   WINS              INT  NOT NULL
-);
 
-CREATE VIEW standings
-AS 
-  SELECT players.id, 
-         players.name, 
-         wins.wins, 
-         matches.matches 
-  FROM players 
-       LEFT JOIN wins 
-              ON players.id = wins.id 
-       LEFT JOIN matches 
-              ON players.id = matches.id 
-  GROUP BY players.id, wins.wins, matches.matches;
-
-CREATE VIEW pairings
-AS
-   SELECT players.id,
-          players.name
+CREATE VIEW standings AS
+   SELECT players.id, 
+          players.name, 
+          (SELECT COUNT(matches.winner) FROM matches WHERE players.id = matches.winner) as wins, 
+          (SELECT COUNT(matches.id) FROM matches WHERE players.id = matches.winner OR players.id = matches.loser) as matches
    FROM players
-        LEFT JOIN wins
-               ON players.id = wins.id
-   ORDER BY wins.wins DESC; 
+   ORDER BY wins DESC;
+
+CREATE VIEW selection AS
+   SELECT standings.id,
+          standings.name
+   FROM standings;

@@ -1,0 +1,283 @@
+2016-09-21 20:23:20,286 - INFO: All matches information is nulated
+2016-09-21 20:26:12,132 - INFO: All matches information is nulated
+2016-09-21 20:27:56,184 - ERROR: 'int' object is not callable
+Traceback (most recent call last):
+  File "tournament.py", line 138, in countPlayers
+    return cursor.rowcount()
+TypeError: 'int' object is not callable
+2016-09-21 20:28:04,633 - ERROR: 'int' object is not callable
+Traceback (most recent call last):
+  File "tournament.py", line 138, in countPlayers
+    return cursor.rowcount()
+TypeError: 'int' object is not callable
+2016-09-21 20:30:18,709 - INFO: All matches information is nulated
+2016-09-21 20:30:18,721 - INFO: Chandra Nalaar is registered succesfully
+2016-09-21 20:30:18,728 - INFO: Jace Beleren is registered succesfully
+2016-09-21 20:30:18,745 - INFO: All matches information is nulated
+2016-09-21 20:30:18,758 - INFO: Melpomene Murray is registered succesfully
+2016-09-21 20:30:18,761 - INFO: Randy Schwartz is registered succesfully
+2016-09-21 20:30:18,765 - ERROR: relation "standings" does not exist
+LINE 1: SELECT * FROM standings;
+                      ^
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 203, in playerStandings
+    cursor.execute(self.standings)
+ProgrammingError: relation "standings" does not exist
+LINE 1: SELECT * FROM standings;
+                      ^
+
+2016-09-21 20:41:16,035 - INFO: All matches information is nulated
+2016-09-21 20:41:16,049 - INFO: Chandra Nalaar is registered succesfully
+2016-09-21 20:41:16,056 - INFO: Jace Beleren is registered succesfully
+2016-09-21 20:41:16,073 - INFO: All matches information is nulated
+2016-09-21 20:41:16,085 - INFO: Melpomene Murray is registered succesfully
+2016-09-21 20:41:16,088 - INFO: Randy Schwartz is registered succesfully
+2016-09-21 20:41:16,097 - INFO: All matches information is nulated
+2016-09-21 20:41:16,106 - INFO: Bruno Walton is registered succesfully
+2016-09-21 20:41:16,113 - INFO: Boots O'Neal is registered succesfully
+2016-09-21 20:41:16,116 - INFO: Cathy Burton is registered succesfully
+2016-09-21 20:41:16,120 - INFO: Diane Grant is registered succesfully
+2016-09-21 20:41:16,127 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-21 20:41:16,132 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-21 20:41:16,140 - INFO: All matches information is nulated
+2016-09-21 20:41:16,150 - INFO: All matches information is nulated
+2016-09-21 20:41:16,161 - INFO: Twilight Sparkle is registered succesfully
+2016-09-21 20:41:16,164 - INFO: Fluttershy is registered succesfully
+2016-09-21 20:41:16,168 - INFO: Applejack is registered succesfully
+2016-09-21 20:41:16,172 - INFO: Pinkie Pie is registered succesfully
+2016-09-21 20:41:16,177 - INFO: Rarity is registered succesfully
+2016-09-21 20:41:16,180 - INFO: Rainbow Dash is registered succesfully
+2016-09-21 20:41:16,184 - INFO: Princess Celestia is registered succesfully
+2016-09-21 20:41:16,187 - INFO: Princess Luna is registered succesfully
+2016-09-21 20:41:16,192 - ERROR: relation "pairings" does not exist
+LINE 1: SELECT * FROM pairings;
+                      ^
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 223, in get_pairings
+    cursor.execute(self.pairings)
+ProgrammingError: relation "pairings" does not exist
+LINE 1: SELECT * FROM pairings;
+                      ^
+
+2016-09-26 15:03:12,469 - INFO: All matches information is nulated
+2016-09-26 15:03:12,484 - INFO: Chandra Nalaar is registered succesfully
+2016-09-26 15:03:12,491 - INFO: Jace Beleren is registered succesfully
+2016-09-26 15:03:12,514 - INFO: All matches information is nulated
+2016-09-26 15:03:12,523 - INFO: Melpomene Murray is registered succesfully
+2016-09-26 15:03:12,527 - INFO: Randy Schwartz is registered succesfully
+2016-09-26 15:03:12,538 - INFO: All matches information is nulated
+2016-09-26 15:03:12,552 - INFO: Bruno Walton is registered succesfully
+2016-09-26 15:03:12,555 - INFO: Boots O'Neal is registered succesfully
+2016-09-26 15:03:12,558 - INFO: Cathy Burton is registered succesfully
+2016-09-26 15:03:12,561 - INFO: Diane Grant is registered succesfully
+2016-09-26 15:03:12,569 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:03:12,575 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:03:12,584 - INFO: All matches information is nulated
+2016-09-26 15:03:12,593 - INFO: All matches information is nulated
+2016-09-26 15:03:12,602 - INFO: Twilight Sparkle is registered succesfully
+2016-09-26 15:03:12,607 - INFO: Fluttershy is registered succesfully
+2016-09-26 15:03:12,612 - INFO: Applejack is registered succesfully
+2016-09-26 15:03:12,618 - INFO: Pinkie Pie is registered succesfully
+2016-09-26 15:03:12,622 - INFO: Rarity is registered succesfully
+2016-09-26 15:03:12,626 - INFO: Rainbow Dash is registered succesfully
+2016-09-26 15:03:12,630 - INFO: Princess Celestia is registered succesfully
+2016-09-26 15:03:12,633 - INFO: Princess Luna is registered succesfully
+2016-09-26 15:03:12,638 - ERROR: relation "pairings" does not exist
+LINE 1: SELECT * FROM pairings;
+                      ^
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 223, in get_pairings
+    cursor.execute(self.pairings)
+ProgrammingError: relation "pairings" does not exist
+LINE 1: SELECT * FROM pairings;
+                      ^
+
+2016-09-26 15:50:37,417 - INFO: All matches information is nulated
+2016-09-26 15:50:37,429 - INFO: Chandra Nalaar is registered succesfully
+2016-09-26 15:50:37,436 - INFO: Jace Beleren is registered succesfully
+2016-09-26 15:50:37,456 - INFO: All matches information is nulated
+2016-09-26 15:50:37,467 - INFO: Melpomene Murray is registered succesfully
+2016-09-26 15:50:37,472 - INFO: Randy Schwartz is registered succesfully
+2016-09-26 15:50:37,480 - INFO: All matches information is nulated
+2016-09-26 15:50:37,492 - INFO: Bruno Walton is registered succesfully
+2016-09-26 15:50:37,496 - INFO: Boots O'Neal is registered succesfully
+2016-09-26 15:50:37,499 - INFO: Cathy Burton is registered succesfully
+2016-09-26 15:50:37,503 - INFO: Diane Grant is registered succesfully
+2016-09-26 15:50:37,510 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:50:37,515 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:50:37,524 - INFO: All matches information is nulated
+2016-09-26 15:50:37,534 - INFO: All matches information is nulated
+2016-09-26 15:50:37,543 - INFO: Twilight Sparkle is registered succesfully
+2016-09-26 15:50:37,547 - INFO: Fluttershy is registered succesfully
+2016-09-26 15:50:37,553 - INFO: Applejack is registered succesfully
+2016-09-26 15:50:37,557 - INFO: Pinkie Pie is registered succesfully
+2016-09-26 15:50:37,561 - INFO: Rarity is registered succesfully
+2016-09-26 15:50:37,564 - INFO: Rainbow Dash is registered succesfully
+2016-09-26 15:50:37,568 - INFO: Princess Celestia is registered succesfully
+2016-09-26 15:50:37,572 - INFO: Princess Luna is registered succesfully
+2016-09-26 15:50:37,581 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:50:37,585 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:50:37,590 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-26 15:50:37,595 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-27 07:46:44,728 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-27 07:46:53,418 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-27 07:46:54,170 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-27 07:47:00,574 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:19:47,342 - INFO: All matches information is nulated
+2016-09-29 13:19:47,359 - INFO: Chandra Nalaar is registered succesfully
+2016-09-29 13:19:47,367 - INFO: Jace Beleren is registered succesfully
+2016-09-29 13:19:47,387 - INFO: All matches information is nulated
+2016-09-29 13:19:47,398 - INFO: Melpomene Murray is registered succesfully
+2016-09-29 13:19:47,400 - INFO: Randy Schwartz is registered succesfully
+2016-09-29 13:19:47,416 - INFO: All matches information is nulated
+2016-09-29 13:19:47,427 - INFO: Bruno Walton is registered succesfully
+2016-09-29 13:19:47,431 - INFO: Boots O'Neal is registered succesfully
+2016-09-29 13:19:47,434 - INFO: Cathy Burton is registered succesfully
+2016-09-29 13:19:47,437 - INFO: Diane Grant is registered succesfully
+2016-09-29 13:19:47,448 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:19:47,456 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:19:47,463 - INFO: All matches information is nulated
+2016-09-29 13:19:47,472 - INFO: All matches information is nulated
+2016-09-29 13:19:47,484 - INFO: Twilight Sparkle is registered succesfully
+2016-09-29 13:19:47,488 - INFO: Fluttershy is registered succesfully
+2016-09-29 13:19:47,492 - INFO: Applejack is registered succesfully
+2016-09-29 13:19:47,495 - INFO: Pinkie Pie is registered succesfully
+2016-09-29 13:19:47,498 - INFO: Rarity is registered succesfully
+2016-09-29 13:19:47,501 - INFO: Rainbow Dash is registered succesfully
+2016-09-29 13:19:47,504 - INFO: Princess Celestia is registered succesfully
+2016-09-29 13:19:47,508 - INFO: Princess Luna is registered succesfully
+2016-09-29 13:19:47,517 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:19:47,522 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:19:47,526 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:19:47,530 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:21:28,662 - INFO: All matches information is nulated
+2016-09-29 13:21:28,674 - INFO: Chandra Nalaar is registered succesfully
+2016-09-29 13:21:28,681 - INFO: Jace Beleren is registered succesfully
+2016-09-29 13:21:28,699 - INFO: All matches information is nulated
+2016-09-29 13:21:28,710 - INFO: Melpomene Murray is registered succesfully
+2016-09-29 13:21:28,714 - INFO: Randy Schwartz is registered succesfully
+2016-09-29 13:21:28,722 - INFO: All matches information is nulated
+2016-09-29 13:21:28,732 - INFO: Bruno Walton is registered succesfully
+2016-09-29 13:21:28,736 - INFO: Boots O'Neal is registered succesfully
+2016-09-29 13:21:28,741 - INFO: Cathy Burton is registered succesfully
+2016-09-29 13:21:28,745 - INFO: Diane Grant is registered succesfully
+2016-09-29 13:21:28,751 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:21:28,757 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:21:28,765 - INFO: All matches information is nulated
+2016-09-29 13:21:28,774 - INFO: All matches information is nulated
+2016-09-29 13:21:28,784 - INFO: Twilight Sparkle is registered succesfully
+2016-09-29 13:21:28,788 - INFO: Fluttershy is registered succesfully
+2016-09-29 13:21:28,792 - INFO: Applejack is registered succesfully
+2016-09-29 13:21:28,797 - INFO: Pinkie Pie is registered succesfully
+2016-09-29 13:21:28,801 - INFO: Rarity is registered succesfully
+2016-09-29 13:21:28,804 - INFO: Rainbow Dash is registered succesfully
+2016-09-29 13:21:28,807 - INFO: Princess Celestia is registered succesfully
+2016-09-29 13:21:28,811 - INFO: Princess Luna is registered succesfully
+2016-09-29 13:21:28,821 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:21:28,825 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:21:28,829 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
+2016-09-29 13:21:28,833 - ERROR: global name 'uid_win' is not defined
+Traceback (most recent call last):
+  File "/vagrant/tournament/tournament.py", line 272, in reportMatch
+    uid_lost +
+NameError: global name 'uid_win' is not defined
