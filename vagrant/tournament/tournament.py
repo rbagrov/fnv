@@ -267,9 +267,9 @@ class db(object):
             connection.commit()
             self.log.info(
                 'Match between ' +
-                uid_win +
+                str(uid[0]) +
                 ' and ' +
-                uid_lost +
+                str(uid[1]) +
                 ' was succefully stored')
             return 'OK'
         except Exception as e:
